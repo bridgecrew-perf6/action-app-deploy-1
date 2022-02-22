@@ -1,0 +1,44 @@
+name: 'App deploy action'
+description: 'Sample action to be used for app deployment'
+inputs:
+  url: 
+    description: 'destination'
+    required: true
+    default: 'https://me.you'
+  username:  
+    description: 'deploy user name'
+    required: true
+    default: 'su' 
+  password: 
+    description: 'pass'
+    required: true
+    default: 'verysecret'
+  client_key:  
+    description: 'For cert based auth'
+    required: false
+    default: 'ckey' 
+  client_cert: 
+    description: 'For cert based auth'
+    required: false
+    default: 'ccert'
+  appname:  
+    description: 'name of the app to be deployed'
+    required: true
+    default: 'chucknoris2.jar'
+#outputs:
+#  random-number:
+#    description: "Random number"
+#    value: ${{ steps.random-number-generator.outputs.random-id }}
+runs:
+  using: "composite"
+  steps:
+    - run: echo Dear ${{ inputs.url }}.
+      shell: bash
+    - run: echo I ${{ inputs.username }} is coming with pass ${{ inputs.password }}
+      shell: bash
+    - run: echo Not sure if I ever need  ${{ inputs.client_key }} and ${{ inputs.client_cert }}
+      shell: bash
+    - run: echo But for sure I am going to deploy ${{ inputs.appname }}.
+      shell: bash
+    - run: goodbye.sh
+      shell: bash
